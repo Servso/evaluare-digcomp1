@@ -1,0 +1,1017 @@
+<!DOCTYPE html>
+<html lang="ro">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Evaluare Competențe Digitale – Domeniul 1</title>
+<link href="https://fonts.googleapis.com/css2?family=Syne:wght@400;600;700;800&family=DM+Sans:ital,wght@0,300;0,400;0,500;1,300&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --bg: #f5f2eb;
+    --ink: #1a1714;
+    --accent: #e8440a;
+    --accent2: #2d6be4;
+    --accent3: #1a9e5c;
+    --panel: #ffffff;
+    --muted: #7a746b;
+    --border: #d8d1c6;
+    --shadow: 0 2px 20px rgba(26,23,20,0.08);
+  }
+
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+
+  body {
+    font-family: 'DM Sans', sans-serif;
+    background: var(--bg);
+    color: var(--ink);
+    min-height: 100vh;
+    font-size: 15px;
+    line-height: 1.6;
+  }
+
+  /* HEADER */
+  .site-header {
+    background: var(--ink);
+    color: #f5f2eb;
+    padding: 28px 40px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    position: sticky;
+    top: 0;
+    z-index: 100;
+    border-bottom: 3px solid var(--accent);
+  }
+  .site-header .logo {
+    font-family: 'Syne', sans-serif;
+    font-weight: 800;
+    font-size: 1.15rem;
+    letter-spacing: -0.02em;
+    line-height: 1.2;
+  }
+  .site-header .logo span { color: var(--accent); }
+  .site-header .badge {
+    font-family: 'DM Sans', sans-serif;
+    font-size: 0.7rem;
+    font-weight: 500;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    color: #9e9589;
+    margin-top: 2px;
+  }
+  .progress-bar-wrap {
+    flex: 1;
+    max-width: 280px;
+    margin: 0 32px;
+  }
+  .progress-label {
+    font-size: 0.72rem;
+    color: #9e9589;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    margin-bottom: 6px;
+    display: flex;
+    justify-content: space-between;
+  }
+  .progress-track {
+    background: #2e2b27;
+    height: 5px;
+    border-radius: 3px;
+    overflow: hidden;
+  }
+  .progress-fill {
+    height: 100%;
+    background: var(--accent);
+    border-radius: 3px;
+    width: 0%;
+    transition: width 0.5s ease;
+  }
+
+  /* LAYOUT */
+  .container {
+    max-width: 860px;
+    margin: 0 auto;
+    padding: 48px 24px 80px;
+  }
+
+  /* INTRO SCREEN */
+  #screen-intro {
+    text-align: center;
+    padding: 60px 0;
+  }
+  #screen-intro .tag {
+    display: inline-block;
+    background: var(--accent);
+    color: white;
+    font-size: 0.7rem;
+    font-weight: 700;
+    letter-spacing: 0.15em;
+    text-transform: uppercase;
+    padding: 5px 14px;
+    border-radius: 2px;
+    margin-bottom: 24px;
+  }
+  #screen-intro h1 {
+    font-family: 'Syne', sans-serif;
+    font-size: clamp(2rem, 5vw, 3.2rem);
+    font-weight: 800;
+    line-height: 1.1;
+    letter-spacing: -0.03em;
+    margin-bottom: 20px;
+  }
+  #screen-intro h1 em {
+    font-style: normal;
+    color: var(--accent);
+  }
+  #screen-intro p {
+    color: var(--muted);
+    max-width: 520px;
+    margin: 0 auto 36px;
+    font-size: 1rem;
+    line-height: 1.7;
+  }
+
+  .scale-legend {
+    display: flex;
+    justify-content: center;
+    gap: 12px;
+    flex-wrap: wrap;
+    margin-bottom: 40px;
+  }
+  .scale-item {
+    background: var(--panel);
+    border: 1.5px solid var(--border);
+    border-radius: 8px;
+    padding: 12px 16px;
+    text-align: center;
+    min-width: 160px;
+  }
+  .scale-item .num {
+    font-family: 'Syne', sans-serif;
+    font-size: 1.5rem;
+    font-weight: 800;
+    color: var(--accent);
+    line-height: 1;
+    margin-bottom: 4px;
+  }
+  .scale-item .desc {
+    font-size: 0.78rem;
+    color: var(--muted);
+    line-height: 1.3;
+  }
+
+  .btn-start {
+    display: inline-flex;
+    align-items: center;
+    gap: 10px;
+    background: var(--accent);
+    color: white;
+    border: none;
+    padding: 16px 36px;
+    font-family: 'Syne', sans-serif;
+    font-size: 1rem;
+    font-weight: 700;
+    border-radius: 4px;
+    cursor: pointer;
+    transition: background 0.2s, transform 0.15s;
+    letter-spacing: 0.01em;
+  }
+  .btn-start:hover { background: #c93608; transform: translateY(-1px); }
+
+  /* COMPETENCY TABS */
+  .comp-tabs {
+    display: flex;
+    gap: 0;
+    border-bottom: 2px solid var(--border);
+    margin-bottom: 36px;
+  }
+  .comp-tab {
+    flex: 1;
+    padding: 14px 12px;
+    font-family: 'Syne', sans-serif;
+    font-size: 0.8rem;
+    font-weight: 700;
+    letter-spacing: 0.03em;
+    text-align: center;
+    cursor: pointer;
+    border: none;
+    background: none;
+    color: var(--muted);
+    border-bottom: 3px solid transparent;
+    margin-bottom: -2px;
+    transition: color 0.2s, border-color 0.2s;
+  }
+  .comp-tab.active { color: var(--ink); border-bottom-color: var(--accent); }
+  .comp-tab.done { color: var(--accent3); }
+  .comp-tab .tab-icon { display: block; font-size: 1.2rem; margin-bottom: 4px; }
+
+  /* COMPETENCY PANEL */
+  .comp-panel { display: none; }
+  .comp-panel.active { display: block; }
+
+  .comp-header {
+    background: var(--ink);
+    color: white;
+    border-radius: 8px 8px 0 0;
+    padding: 24px 28px;
+    margin-bottom: 0;
+  }
+  .comp-header .comp-num {
+    font-size: 0.7rem;
+    font-weight: 700;
+    letter-spacing: 0.15em;
+    text-transform: uppercase;
+    color: var(--accent);
+    margin-bottom: 6px;
+  }
+  .comp-header h2 {
+    font-family: 'Syne', sans-serif;
+    font-size: 1.25rem;
+    font-weight: 700;
+    line-height: 1.3;
+  }
+
+  /* LEVEL SECTIONS */
+  .level-section {
+    border: 1.5px solid var(--border);
+    border-top: none;
+    background: var(--panel);
+    overflow: hidden;
+  }
+  .level-section:last-of-type { border-radius: 0 0 8px 8px; }
+
+  .level-header {
+    padding: 14px 28px;
+    background: #f9f7f3;
+    border-bottom: 1.5px solid var(--border);
+    display: flex;
+    align-items: center;
+    gap: 12px;
+  }
+  .level-badge {
+    font-family: 'Syne', sans-serif;
+    font-size: 0.68rem;
+    font-weight: 800;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    padding: 3px 10px;
+    border-radius: 2px;
+    white-space: nowrap;
+  }
+  .badge-basic { background: #e8f4f0; color: #1a9e5c; }
+  .badge-inter { background: #e8eef9; color: #2d6be4; }
+  .badge-advanced { background: #fff0eb; color: #e8440a; }
+  .badge-expert { background: #f3eded; color: #9b3030; }
+
+  .level-name {
+    font-family: 'Syne', sans-serif;
+    font-size: 0.9rem;
+    font-weight: 600;
+    color: var(--ink);
+  }
+
+  .questions-list {
+    padding: 16px 28px;
+  }
+
+  .question-row {
+    display: grid;
+    grid-template-columns: 1fr auto;
+    align-items: start;
+    gap: 16px;
+    padding: 16px 0;
+    border-bottom: 1px solid #f0ece6;
+  }
+  .question-row:last-child { border-bottom: none; }
+
+  .question-text {
+    font-size: 0.92rem;
+    line-height: 1.5;
+    color: var(--ink);
+  }
+  .question-text strong {
+    display: block;
+    font-size: 0.72rem;
+    font-weight: 700;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    color: var(--muted);
+    margin-bottom: 3px;
+  }
+
+  .radio-group {
+    display: flex;
+    gap: 6px;
+  }
+  .radio-option input[type="radio"] { display: none; }
+  .radio-option label {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 40px;
+    height: 40px;
+    border: 2px solid var(--border);
+    border-radius: 6px;
+    font-family: 'Syne', sans-serif;
+    font-weight: 700;
+    font-size: 1rem;
+    cursor: pointer;
+    transition: all 0.15s;
+    color: var(--muted);
+    background: #faf8f5;
+  }
+  .radio-option input[type="radio"]:checked + label {
+    border-color: var(--accent);
+    background: var(--accent);
+    color: white;
+  }
+  .radio-option label:hover {
+    border-color: var(--accent);
+    color: var(--accent);
+  }
+
+  /* NAVIGATION */
+  .nav-actions {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-top: 32px;
+    gap: 12px;
+  }
+
+  .btn {
+    padding: 13px 28px;
+    font-family: 'Syne', sans-serif;
+    font-size: 0.9rem;
+    font-weight: 700;
+    border-radius: 4px;
+    cursor: pointer;
+    border: 2px solid transparent;
+    transition: all 0.2s;
+    letter-spacing: 0.02em;
+  }
+  .btn-primary {
+    background: var(--ink);
+    color: white;
+    border-color: var(--ink);
+  }
+  .btn-primary:hover { background: #3a3530; }
+  .btn-secondary {
+    background: transparent;
+    color: var(--muted);
+    border-color: var(--border);
+  }
+  .btn-secondary:hover { border-color: var(--ink); color: var(--ink); }
+  .btn-accent {
+    background: var(--accent);
+    color: white;
+    border-color: var(--accent);
+  }
+  .btn-accent:hover { background: #c93608; }
+
+  .completion-note {
+    font-size: 0.8rem;
+    color: var(--muted);
+    text-align: center;
+  }
+
+  /* RESULTS SCREEN */
+  #screen-results { display: none; }
+  #screen-results.active { display: block; }
+  #screen-quiz { display: none; }
+  #screen-quiz.active { display: block; }
+
+  .results-header {
+    text-align: center;
+    padding: 48px 0 36px;
+  }
+  .results-header .trophy { font-size: 3rem; margin-bottom: 16px; }
+  .results-header h2 {
+    font-family: 'Syne', sans-serif;
+    font-size: 2rem;
+    font-weight: 800;
+    letter-spacing: -0.03em;
+    margin-bottom: 8px;
+  }
+  .results-header p { color: var(--muted); }
+
+  .results-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 16px;
+    margin: 32px 0;
+  }
+  @media(max-width: 600px) { .results-grid { grid-template-columns: 1fr; } }
+
+  .result-card {
+    background: var(--panel);
+    border: 1.5px solid var(--border);
+    border-radius: 10px;
+    padding: 24px 20px;
+    text-align: center;
+    position: relative;
+    overflow: hidden;
+  }
+  .result-card::before {
+    content: '';
+    position: absolute;
+    top: 0; left: 0; right: 0;
+    height: 4px;
+  }
+  .result-card.c11::before { background: var(--accent); }
+  .result-card.c12::before { background: var(--accent2); }
+  .result-card.c13::before { background: var(--accent3); }
+
+  .result-card .comp-label {
+    font-size: 0.68rem;
+    font-weight: 700;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    color: var(--muted);
+    margin-bottom: 12px;
+  }
+  .result-card .score-big {
+    font-family: 'Syne', sans-serif;
+    font-size: 3rem;
+    font-weight: 800;
+    line-height: 1;
+    margin-bottom: 4px;
+  }
+  .c11 .score-big { color: var(--accent); }
+  .c12 .score-big { color: var(--accent2); }
+  .c13 .score-big { color: var(--accent3); }
+  .result-card .score-max { font-size: 0.8rem; color: var(--muted); margin-bottom: 12px; }
+  .result-card .level-tag {
+    display: inline-block;
+    padding: 4px 12px;
+    border-radius: 20px;
+    font-size: 0.72rem;
+    font-weight: 700;
+  }
+  .level-low { background: #fde8e8; color: #c53030; }
+  .level-med { background: #fff8e1; color: #b45309; }
+  .level-good { background: #e8f4f0; color: #1a6e4d; }
+  .level-adv { background: #e8eef9; color: #1e4bb8; }
+
+  .score-bar-wrap {
+    height: 8px;
+    background: #ede8e0;
+    border-radius: 4px;
+    overflow: hidden;
+    margin: 12px 0 4px;
+  }
+  .score-bar-fill {
+    height: 100%;
+    border-radius: 4px;
+    transition: width 1s ease 0.3s;
+  }
+
+  .total-card {
+    background: var(--ink);
+    color: white;
+    border-radius: 10px;
+    padding: 28px 32px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin: 16px 0 32px;
+    gap: 24px;
+    flex-wrap: wrap;
+  }
+  .total-card .t-label {
+    font-size: 0.72rem;
+    font-weight: 700;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    color: #9e9589;
+    margin-bottom: 6px;
+  }
+  .total-card .t-score {
+    font-family: 'Syne', sans-serif;
+    font-size: 2.5rem;
+    font-weight: 800;
+    color: var(--accent);
+    line-height: 1;
+  }
+  .total-card .t-desc { font-size: 0.95rem; line-height: 1.5; color: #cec8bf; }
+
+  .restart-btn {
+    display: block;
+    width: 100%;
+    max-width: 320px;
+    margin: 0 auto;
+    text-align: center;
+  }
+
+  /* ALERT */
+  .alert-toast {
+    position: fixed;
+    bottom: 24px;
+    right: 24px;
+    background: var(--ink);
+    color: white;
+    padding: 14px 20px;
+    border-radius: 8px;
+    font-size: 0.85rem;
+    border-left: 4px solid var(--accent);
+    transform: translateY(80px);
+    opacity: 0;
+    transition: all 0.3s;
+    z-index: 999;
+    max-width: 320px;
+  }
+  .alert-toast.show { transform: translateY(0); opacity: 1; }
+
+  @media(max-width: 640px) {
+    .site-header { padding: 16px 20px; }
+    .progress-bar-wrap { display: none; }
+    .container { padding: 24px 16px 60px; }
+    .questions-list { padding: 12px 16px; }
+    .level-header { padding: 12px 16px; }
+    .question-row { grid-template-columns: 1fr; gap: 10px; }
+    .radio-group { justify-content: flex-start; }
+  }
+</style>
+</head>
+<body>
+
+<header class="site-header">
+  <div>
+    <div class="logo">Digital Skills <span>Hub</span></div>
+    <div class="badge">Evaluare competențe digitale · Domeniul 1</div>
+  </div>
+  <div class="progress-bar-wrap" id="progressWrap" style="display:none">
+    <div class="progress-label">
+      <span>Progres</span>
+      <span id="progressPct">0%</span>
+    </div>
+    <div class="progress-track"><div class="progress-fill" id="progressFill"></div></div>
+  </div>
+</header>
+
+<div class="container">
+
+  <!-- INTRO -->
+  <div id="screen-intro">
+    <div class="tag">DigComp 2.2 · Domeniul 1</div>
+    <h1>Evaluare<br><em>Competențe Digitale</em></h1>
+    <p>Acest chestionar măsoară nivelul tău de competență în <strong>Domeniul 1 – Cunoașterea informațiilor și a datelor</strong>, conform cadrului european DigComp 2.2.</p>
+
+    <div class="scale-legend">
+      <div class="scale-item">
+        <div class="num">1</div>
+        <div class="desc">Nu știu / nu am folosit niciodată</div>
+      </div>
+      <div class="scale-item">
+        <div class="num">2</div>
+        <div class="desc">Nivel de bază – pot face cu ajutor</div>
+      </div>
+      <div class="scale-item">
+        <div class="num">3</div>
+        <div class="desc">Nivel intermediar – pot face singur(ă)</div>
+      </div>
+      <div class="scale-item">
+        <div class="num">4</div>
+        <div class="desc">Nivel avansat – pot ajuta și pe alții</div>
+      </div>
+    </div>
+
+    <button class="btn-start" onclick="startQuiz()">
+      Începe evaluarea
+      <span>→</span>
+    </button>
+  </div>
+
+  <!-- QUIZ -->
+  <div id="screen-quiz">
+    <div class="comp-tabs">
+      <button class="comp-tab active" id="tab-c11" onclick="switchComp(0)">
+        <span class="tab-icon">🔍</span>Comp. 1.1
+      </button>
+      <button class="comp-tab" id="tab-c12" onclick="switchComp(1)">
+        <span class="tab-icon">⚖️</span>Comp. 1.2
+      </button>
+      <button class="comp-tab" id="tab-c13" onclick="switchComp(2)">
+        <span class="tab-icon">🗂️</span>Comp. 1.3
+      </button>
+    </div>
+
+    <!-- COMP 1.1 -->
+    <div class="comp-panel active" id="panel-c11">
+      <div class="comp-header">
+        <div class="comp-num">Competența 1.1</div>
+        <h2>Navigarea, Căutarea și Filtrarea Datelor, Informațiilor și Conținutului Digital</h2>
+      </div>
+
+      <div id="questions-c11"></div>
+
+      <div class="nav-actions">
+        <span class="completion-note" id="note-c11"></span>
+        <button class="btn btn-primary" onclick="nextComp(0)">Continuă → Comp. 1.2</button>
+      </div>
+    </div>
+
+    <!-- COMP 1.2 -->
+    <div class="comp-panel" id="panel-c12">
+      <div class="comp-header" style="background:#1a3a6e">
+        <div class="comp-num">Competența 1.2</div>
+        <h2>Evaluarea Datelor, Informațiilor și Conținutului Digital</h2>
+      </div>
+
+      <div id="questions-c12"></div>
+
+      <div class="nav-actions">
+        <button class="btn btn-secondary" onclick="switchComp(0)">← Înapoi</button>
+        <span class="completion-note" id="note-c12"></span>
+        <button class="btn btn-primary" onclick="nextComp(1)">Continuă → Comp. 1.3</button>
+      </div>
+    </div>
+
+    <!-- COMP 1.3 -->
+    <div class="comp-panel" id="panel-c13">
+      <div class="comp-header" style="background:#0d4a2a">
+        <div class="comp-num">Competența 1.3</div>
+        <h2>Gestionarea Datelor, Informațiilor și Conținutului Digital</h2>
+      </div>
+
+      <div id="questions-c13"></div>
+
+      <div class="nav-actions">
+        <button class="btn btn-secondary" onclick="switchComp(1)">← Înapoi</button>
+        <span class="completion-note" id="note-c13"></span>
+        <button class="btn btn-accent" onclick="submitAll()">✓ Finalizează evaluarea</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- RESULTS -->
+  <div id="screen-results">
+    <div class="results-header">
+      <div class="trophy">🎯</div>
+      <h2>Rezultatele evaluării</h2>
+      <p>Domeniul 1 – Cunoașterea informațiilor și a datelor</p>
+    </div>
+
+    <div class="results-grid">
+      <div class="result-card c11">
+        <div class="comp-label">Comp. 1.1 · Navigare & Căutare</div>
+        <div class="score-big" id="score-c11-val">—</div>
+        <div class="score-max">din 32 puncte</div>
+        <div class="score-bar-wrap"><div class="score-bar-fill" id="bar-c11" style="background:var(--accent);width:0%"></div></div>
+        <div class="level-tag" id="level-c11">—</div>
+      </div>
+      <div class="result-card c12">
+        <div class="comp-label">Comp. 1.2 · Evaluare surse</div>
+        <div class="score-big" id="score-c12-val">—</div>
+        <div class="score-max">din 32 puncte</div>
+        <div class="score-bar-wrap"><div class="score-bar-fill" id="bar-c12" style="background:var(--accent2);width:0%"></div></div>
+        <div class="level-tag" id="level-c12">—</div>
+      </div>
+      <div class="result-card c13">
+        <div class="comp-label">Comp. 1.3 · Gestionare date</div>
+        <div class="score-big" id="score-c13-val">—</div>
+        <div class="score-max">din 32 puncte</div>
+        <div class="score-bar-wrap"><div class="score-bar-fill" id="bar-c13" style="background:var(--accent3);width:0%"></div></div>
+        <div class="level-tag" id="level-c13">—</div>
+      </div>
+    </div>
+
+    <div class="total-card">
+      <div>
+        <div class="t-label">Scor total Domeniul 1</div>
+        <div class="t-score" id="score-total">—</div>
+        <div style="font-size:0.8rem;color:#6b6560;margin-top:2px">din 96 puncte maxim</div>
+      </div>
+      <div style="flex:1;min-width:180px">
+        <div class="t-label">Interpretare generală</div>
+        <div class="t-desc" id="total-desc">—</div>
+      </div>
+    </div>
+
+    <div class="restart-btn">
+      <button class="btn btn-secondary" onclick="restart()" style="width:100%">↺ Reia evaluarea</button>
+    </div>
+  </div>
+
+</div>
+
+<div class="alert-toast" id="toast">Te rugăm să completezi toate întrebările din această secțiune.</div>
+
+<script>
+const QUESTIONS = {
+  c11: [
+    { level: 1, badge: 'badge-basic', name: 'Nivel de bază 1', items: [
+      { id: '1.1', title: 'Identificarea nevoilor de informare', text: 'Pot să îmi identific nevoile de informare și să aleg datele și informațiile pe care le caut.' },
+      { id: '1.2', title: 'Găsirea datelor și informațiilor', text: 'Pot să găsesc informații și conținuturi simple printr-o căutare pe internet.' },
+      { id: '1.3', title: 'Accesarea și navigarea în conținut', text: 'Pot să accesez datele și informațiile găsite și să navighez între ele într-un mod simplu.' },
+      { id: '1.4', title: 'Strategii simple de căutare', text: 'Pot să folosesc strategii simple de căutare (ex: cuvinte cheie) pentru a găsi informații pe internet.' },
+    ]},
+    { level: 2, badge: 'badge-basic', name: 'Nivel de bază 2', items: [
+      { id: '2.1', title: 'Identificarea surselor de informare', text: 'Pot să identific sursele de informare relevante dintr-o listă (ex: site-uri de încredere pentru joburi, educație, etc.).' },
+      { id: '2.2', title: 'Căutare cu motor de căutare', text: 'Pot să efectuez căutări simple folosind un motor de căutare pentru a găsi informațiile dorite.' },
+      { id: '2.3', title: 'Navigarea între surse', text: 'Pot să accesez și să navighez între site-uri web și baze de date pentru a găsi informații utile.' },
+      { id: '2.4', title: 'Strategie personală de căutare', text: 'Pot să formulez strategii simple de căutare pentru a găsi date relevante.' },
+    ]},
+    { level: 3, badge: 'badge-inter', name: 'Nivel intermediar 3', items: [
+      { id: '3.1', title: 'Explicarea nevoilor de informare', text: 'Pot să explic clar ce informație am nevoie și să o caut eficient.' },
+      { id: '3.2', title: 'Căutări bine definite', text: 'Pot să efectuez căutări de rutină și să găsesc informații în mod eficient.' },
+      { id: '3.3', title: 'Navigarea între surse diverse', text: 'Pot să explic cum accesez sursele de informație și cum navighez între ele.' },
+      { id: '3.4', title: 'Aplicarea strategiilor de căutare', text: 'Pot să descriu și să aplic strategii de căutare simple pentru a găsi informațiile necesare.' },
+    ]},
+    { level: 4, badge: 'badge-inter', name: 'Nivel intermediar 4', items: [
+      { id: '4.1', title: 'Definirea detaliată a nevoilor', text: 'Pot să explic clar nevoile de informare și să le definesc detaliat.' },
+      { id: '4.2', title: 'Organizarea căutărilor complexe', text: 'Pot să organizez căutări complexe pentru a găsi informații corecte și complete.' },
+      { id: '4.3', title: 'Navigare eficientă între surse', text: 'Pot să accesez și să navighez între sursele de informație într-un mod eficient.' },
+      { id: '4.4', title: 'Strategii de căutare personală', text: 'Pot să organizez și să aplic strategii de căutare pentru a găsi informații de înaltă calitate.' },
+    ]},
+    { level: 5, badge: 'badge-advanced', name: 'Nivel avansat 5', items: [
+      { id: '5.1', title: 'Răspuns eficient la nevoile de informare', text: 'Pot să răspund eficient la nevoile de informare folosind diverse instrumente digitale.' },
+      { id: '5.2', title: 'Căutări complexe avansate', text: 'Pot să aplic strategii de căutare avansate pentru a obține date, informații și conținuturi complexe.' },
+      { id: '5.3', title: 'Ghidarea altora în navigare', text: 'Pot să explic altora cum să acceseze și să navigheze între surse de informații.' },
+      { id: '5.4', title: 'Strategii de căutare personalizate', text: 'Pot să creez strategii de căutare personalizate care răspund nevoilor mele de informare.' },
+    ]},
+    { level: 6, badge: 'badge-advanced', name: 'Nivel avansat 6', items: [
+      { id: '6.1', title: 'Evaluarea nevoilor de informare', text: 'Pot să evaluez complexitatea nevoilor de informare și să adaptez strategia de căutare.' },
+      { id: '6.2', title: 'Adaptarea strategiilor de căutare', text: 'Pot să adaptez strategia de căutare pentru a găsi cele mai relevante date, informații și conținuturi.' },
+      { id: '6.3', title: 'Navigarea între sursele relevante', text: 'Pot să explic cum accesez și navighez între cele mai relevante surse și conținuturi.' },
+      { id: '6.4', title: 'Varierea strategiilor pentru scopuri diferite', text: 'Pot să modific strategiile de căutare pentru a răspunde la diferite nevoi și scopuri de informare.' },
+    ]},
+    { level: 7, badge: 'badge-expert', name: 'Înaltă specializare 7', items: [
+      { id: '7.1', title: 'Soluții pentru probleme complexe', text: 'Pot să dezvolt soluții pentru probleme complexe legate de navigarea, căutarea și filtrarea datelor.' },
+      { id: '7.2', title: 'Ghidarea altora în căutare', text: 'Pot să integrez cunoștințele dobândite pentru a ghida pe alții în căutarea și filtrarea datelor.' },
+    ]},
+    { level: 8, badge: 'badge-expert', name: 'Înaltă specializare 8', items: [
+      { id: '8.1', title: 'Soluții inovative de căutare', text: 'Pot să creez soluții pentru probleme complexe legate de căutarea și filtrarea datelor, adaptate la multiple variabile.' },
+      { id: '8.2', title: 'Proiectarea de noi procese', text: 'Pot să propun noi idei și procese care îmbunătățesc navigarea și căutarea datelor.' },
+    ]},
+  ],
+  c12: [
+    { level: 1, badge: 'badge-basic', name: 'Nivel de bază 1', items: [
+      { id: '1.1', title: 'Identificarea surselor de informare', text: 'Pot să identific sursele de informare de încredere dintr-o listă oferită (de exemplu, site-uri web, bloguri).' },
+      { id: '1.2', title: 'Recunoașterea dezinformării', text: 'Înțeleg că informațiile disponibile online nu sunt întotdeauna corecte și pot conține dezinformare.' },
+      { id: '1.3', title: 'Verificarea surselor de informație', text: 'Pot să verific cine este autorul informațiilor găsite și să confirm dacă sursa este credibilă.' },
+      { id: '1.4', title: 'Evitarea surselor incorecte', text: 'Pot să recunosc și să evit informațiile false sau înșelătoare (de exemplu, „clickbait").' },
+    ]},
+    { level: 2, badge: 'badge-basic', name: 'Nivel de bază 2', items: [
+      { id: '2.1', title: 'Identificarea și evaluarea surselor', text: 'Pot să identific sursele de informare online care sunt credibile și de încredere, precum portaluri sau bloguri verificate.' },
+      { id: '2.2', title: 'Compararea surselor', text: 'Pot compara mai multe surse de informare pentru a verifica dacă informațiile oferite sunt corecte.' },
+      { id: '2.3', title: 'Verificarea autorității sursei', text: 'Pot să identific autorul sau instituția care furnizează informațiile și să verific dacă sunt o autoritate în domeniu.' },
+      { id: '2.4', title: 'Recunoașterea informațiilor false', text: 'Pot să disting între dezinformare și lipsă de informare și să identific sursele dezinformării.' },
+    ]},
+    { level: 3, badge: 'badge-inter', name: 'Nivel intermediar 3', items: [
+      { id: '3.1', title: 'Evaluarea și analiza surselor', text: 'Pot să analizez și să evaluez cu atenție sursele de informație pentru a determina dacă sunt credibile și fiabile.' },
+      { id: '3.2', title: 'Dezinformare vs. lipsă de informare', text: 'Pot să explic diferența dintre dezinformare și lipsa de informare și să le aplic în analiza informațiilor.' },
+      { id: '3.3', title: 'Verificarea punctului de vedere', text: 'Pot să identific punctul de vedere sau prejudecățile unei surse de informație (ex: politice, economice).' },
+      { id: '3.4', title: 'Eficiența în gestionarea surselor', text: 'Pot să analizez rezultatele căutărilor online și să identific sursele fiabile și relevante pentru nevoile mele.' },
+    ]},
+    { level: 4, badge: 'badge-inter', name: 'Nivel intermediar 4', items: [
+      { id: '4.1', title: 'Evaluarea din perspective multiple', text: 'Pot să compar și să analizez surse diferite pentru a obține o imagine completă asupra unui subiect.' },
+      { id: '4.2', title: 'Algoritmii de personalizare', text: 'Pot să identific cum algoritmii influențează conținutul pe care îl primesc pe internet (ex: „camere de ecou" sau „bule de filtrare").' },
+      { id: '4.3', title: 'Conținut sponsorizat', text: 'Pot să recunosc conținutul sponsorizat sau reclamele, chiar și atunci când acestea nu sunt semnalizate clar.' },
+      { id: '4.4', title: 'Fluxuri social media', text: 'Pot să analizez fluxurile de activitate din social media pentru a înțelege de unde provine informația și pentru a determina veridicitatea acesteia.' },
+    ]},
+    { level: 5, badge: 'badge-advanced', name: 'Nivel avansat 5', items: [
+      { id: '5.1', title: 'Analiza surselor multiple', text: 'Pot să analizez cu succes surse multiple de informare și să le compar pentru a verifica acuratețea informațiilor.' },
+      { id: '5.2', title: 'Identificarea prejudecăților', text: 'Pot să recunosc și să analizez prejudecățile (ex: politice, economice, de gen) care pot influența informațiile online.' },
+      { id: '5.3', title: 'Verificarea originilor și intențiilor', text: 'Pot să identific scopul din spatele surselor de informație și să analizez dacă informațiile sunt prezentate corect sau manipulativ.' },
+      { id: '5.4', title: 'Evaluare critică avansată', text: 'Pot să evaluez și să analizez critic rezultatele căutărilor și să înțeleg contextul mai larg în care au fost create informațiile.' },
+    ]},
+    { level: 6, badge: 'badge-advanced', name: 'Nivel avansat 6', items: [
+      { id: '6.1', title: 'Evaluarea surselor complexe', text: 'Pot să evaluez surse complexe și să adaptez tehnicile de căutare pentru a găsi cele mai fiabile informații dintr-o varietate de surse.' },
+      { id: '6.2', title: 'Comparare și interpretare avansată', text: 'Pot să compar informațiile din surse multiple, să identific discrepanțele și să iau decizii fundamentate pe baza lor.' },
+      { id: '6.3', title: 'Evaluare critică în scenarii complexe', text: 'Pot să aplic abilități de evaluare critică a informațiilor pentru a rezolva probleme complexe din mediul digital.' },
+      { id: '6.4', title: 'Algoritmi și context informațional', text: 'Pot să explic cum algoritmii influențează accesul la informații și să îmi adaptez căutările pentru a depăși limitările lor.' },
+    ]},
+    { level: 7, badge: 'badge-expert', name: 'Înaltă specializare 7', items: [
+      { id: '7.1', title: 'Soluții pentru evaluarea informațiilor', text: 'Pot să creez soluții pentru a rezolva probleme complexe legate de evaluarea datelor și informațiilor în mediile digitale.' },
+      { id: '7.2', title: 'Ghidarea altora în evaluare', text: 'Pot să ghid și să instruiesc alți utilizatori să evalueze corect și să analizeze sursele de informație.' },
+    ]},
+    { level: 8, badge: 'badge-expert', name: 'Înaltă specializare 8', items: [
+      { id: '8.1', title: 'Soluții inovative pentru evaluarea datelor', text: 'Pot să creez procese și soluții inovative pentru a rezolva probleme complexe în evaluarea datelor și a conținutului digital.' },
+      { id: '8.2', title: 'Cadru critic în evaluarea informațiilor', text: 'Pot să contribui cu idei noi și să propun metode avansate pentru evaluarea informațiilor digitale.' },
+    ]},
+  ],
+  c13: [
+    { level: 1, badge: 'badge-basic', name: 'Nivel de bază 1', items: [
+      { id: '1.1', title: 'Identificarea surselor de date', text: 'Pot să identific sursele de date și informații din aplicații de stocare (ex: cloud, aplicații de joburi) și să le accesez.' },
+      { id: '1.2', title: 'Colectarea și stocarea datelor', text: 'Pot colecta date simple (ex: prin formulare online) și le pot organiza într-un mod simplu (ex: tabele).' },
+      { id: '1.3', title: 'Prelucrarea de bază a datelor', text: 'Pot organiza datele într-un tabel simplu, fără a folosi funcții avansate (ex: antete, linii de separare).' },
+      { id: '1.4', title: 'Accesarea datelor stocate', text: 'Pot accesa și recupera date din aplicații sau fișiere salvate (ex: salvarea și deschiderea fișierelor din cloud).' },
+    ]},
+    { level: 2, badge: 'badge-basic', name: 'Nivel de bază 2', items: [
+      { id: '2.1', title: 'Organizarea datelor în aplicații', text: 'Pot organiza anunțuri de locuri de muncă, date personale sau alte informații într-o aplicație (ex: Indeed, Google Drive).' },
+      { id: '2.2', title: 'Sistem de stocare a datelor', text: 'Pot să utilizez un sistem de stocare pentru a organiza linkuri, fișiere și documente pe care le accesez frecvent.' },
+      { id: '2.3', title: 'Vizualizări simple ale datelor', text: 'Pot aplica funcții simple în foile de calcul pentru a crea grafice și tabele de bază.' },
+      { id: '2.4', title: 'Recuperarea datelor din diverse locații', text: 'Pot recupera date stocate pe dispozitive diferite (ex: smartphone, laptop, cloud) și le pot organiza într-un loc centralizat.' },
+    ]},
+    { level: 3, badge: 'badge-inter', name: 'Nivel intermediar 3', items: [
+      { id: '3.1', title: 'Organizarea datelor complexe', text: 'Pot să aplic funcții de bază pentru a organiza date complexe într-un mediu structurat (ex: utilizând foile de calcul).' },
+      { id: '3.2', title: 'Vizualizări avansate ale datelor', text: 'Pot crea grafice și vizualizări din datele colectate pentru a le prezenta într-o formă ușor de înțeles.' },
+      { id: '3.3', title: 'Compararea datelor din surse diferite', text: 'Pot compara și analiza date provenite din surse diferite pentru a le organiza într-un mod coerent.' },
+      { id: '3.4', title: 'Gestionarea stocării în diverse locații', text: 'Pot alege locația potrivită (cloud, local, rețea) pentru a stoca date, în funcție de necesitățile de accesibilitate și securitate.' },
+    ]},
+    { level: 4, badge: 'badge-inter', name: 'Nivel intermediar 4', items: [
+      { id: '4.1', title: 'Sistem de stocare complex', text: 'Pot organiza date într-un sistem structurat complex, incluzând foldere și subfoldere pentru eficiență.' },
+      { id: '4.2', title: 'Prelucrarea avansată a datelor', text: 'Pot să aplic analize de date mai complexe folosind instrumente (de ex: Excel, Google Sheets) pentru a analiza tendințe și patternuri.' },
+      { id: '4.3', title: 'Vizualizări dinamice de date', text: 'Pot să manipulez grafice dinamice sau vizualizări de date interactive pentru a le adapta nevoilor mele de analiză.' },
+      { id: '4.4', title: 'Bazele de date complexe', text: 'Pot să interacționez cu baze de date mai complexe pentru a organiza și a stoca date mari.' },
+    ]},
+    { level: 5, badge: 'badge-advanced', name: 'Nivel avansat 5', items: [
+      { id: '5.1', title: 'Sistem personalizat de gestionare', text: 'Pot să creez și să implementez un sistem personalizat de stocare și organizare a datelor pentru diferite scopuri.' },
+      { id: '5.2', title: 'Analiza datelor pentru decizii', text: 'Pot utiliza proceduri statistice de bază pentru a analiza datele și pentru a lua decizii informate.' },
+      { id: '5.3', title: 'Soluții pentru organizarea datelor', text: 'Pot să creez soluții de stocare a datelor care sunt eficiente și ușor accesibile, ținând cont de nevoile organizatorice.' },
+      { id: '5.4', title: 'Transparența și fiabilitatea datelor', text: 'Sunt atent(ă) la prezentarea corectă și transparentă a datelor, astfel încât să evit manipulările sau informațiile eronate.' },
+    ]},
+    { level: 6, badge: 'badge-advanced', name: 'Nivel avansat 6', items: [
+      { id: '6.1', title: 'Sistem robust de analiză a datelor', text: 'Pot să dezvolt și să implementez soluții de analiză a datelor folosind software avansat (de ex: baze de date relaționale, software de analiză).' },
+      { id: '6.2', title: 'Integrarea mai multor surse de date', text: 'Pot să integrez date din multiple surse (cloud, rețea, bază de date) și să le manipulez într-un sistem centralizat.' },
+      { id: '6.3', title: 'Vizualizări avansate pentru raportare', text: 'Pot să creez rapoarte și vizualizări avansate (de ex: dashboard-uri) care să ajute la interpretarea datelor.' },
+      { id: '6.4', title: 'Protejarea datelor sensibile', text: 'Sunt conștient(ă) de riscurile implicate în manipularea datelor sensibile și aplic măsuri pentru protecția acestora.' },
+    ]},
+    { level: 7, badge: 'badge-expert', name: 'Înaltă specializare 7', items: [
+      { id: '7.1', title: 'Soluții pentru date complexe', text: 'Pot să dezvolt soluții inovative pentru a gestiona și organiza date complexe într-un mod accesibil și eficient.' },
+      { id: '7.2', title: 'Ghidarea altora în gestionarea datelor', text: 'Pot să instruiesc și să ghidez alte persoane în utilizarea corectă a tehnologiilor pentru gestionarea datelor.' },
+    ]},
+    { level: 8, badge: 'badge-expert', name: 'Înaltă specializare 8', items: [
+      { id: '8.1', title: 'Soluții la scară mare', text: 'Pot să creez soluții scalabile pentru organizarea și prelucrarea datelor mari sau complexe, utilizând tehnici avansate de gestionare a datelor.' },
+      { id: '8.2', title: 'Contribuție la noi tehnologii', text: 'Pot să contribui la dezvoltarea de noi tehnologii pentru stocarea, gestionarea și prelucrarea datelor la nivel înalt.' },
+    ]},
+  ]
+};
+
+const answers = { c11: {}, c12: {}, c13: {} };
+const compKeys = ['c11', 'c12', 'c13'];
+
+function buildQuestions(compKey) {
+  const container = document.getElementById('questions-' + compKey);
+  const data = QUESTIONS[compKey];
+  let html = '';
+  data.forEach(section => {
+    html += `<div class="level-section">
+      <div class="level-header">
+        <span class="level-badge ${section.badge}">${section.name}</span>
+      </div>
+      <div class="questions-list">`;
+    section.items.forEach(item => {
+      const qid = compKey + '_' + item.id;
+      html += `<div class="question-row">
+        <div class="question-text">
+          <strong>${item.id} · ${item.title}</strong>
+          ${item.text}
+        </div>
+        <div class="radio-group">`;
+      [1,2,3,4].forEach(v => {
+        html += `<div class="radio-option">
+          <input type="radio" name="${qid}" id="${qid}_${v}" value="${v}" onchange="recordAnswer('${compKey}','${item.id}',${v})">
+          <label for="${qid}_${v}">${v}</label>
+        </div>`;
+      });
+      html += `</div></div>`;
+    });
+    html += `</div></div>`;
+  });
+  container.innerHTML = html;
+}
+
+function recordAnswer(compKey, itemId, val) {
+  answers[compKey][itemId] = val;
+  updateProgress();
+}
+
+function countTotal() {
+  let total = 0;
+  compKeys.forEach(ck => {
+    QUESTIONS[ck].forEach(s => s.items.forEach(i => total++));
+  });
+  return total;
+}
+
+function countAnswered() {
+  let n = 0;
+  compKeys.forEach(ck => n += Object.keys(answers[ck]).length);
+  return n;
+}
+
+function updateProgress() {
+  const pct = Math.round(countAnswered() / countTotal() * 100);
+  document.getElementById('progressFill').style.width = pct + '%';
+  document.getElementById('progressPct').textContent = pct + '%';
+}
+
+function getCompTotal(compKey) {
+  const data = QUESTIONS[compKey];
+  let sum = 0;
+  data.forEach(s => s.items.forEach(i => {
+    const v = answers[compKey][i.id] || 1;
+    const pts = [0.25, 0.5, 0.75, 1][v - 1];
+    sum += pts;
+  }));
+  return Math.round(sum * 100) / 100;
+}
+
+function isCompComplete(compKey) {
+  const data = QUESTIONS[compKey];
+  let total = 0;
+  data.forEach(s => total += s.items.length);
+  return Object.keys(answers[compKey]).length >= total;
+}
+
+function getLevel(score) {
+  if (score <= 12) return { label: 'Nivel scăzut', cls: 'level-low' };
+  if (score <= 20) return { label: 'Nivel mediu', cls: 'level-med' };
+  if (score <= 28) return { label: 'Nivel bun', cls: 'level-good' };
+  return { label: 'Nivel avansat', cls: 'level-adv' };
+}
+
+function showToast(msg) {
+  const t = document.getElementById('toast');
+  t.textContent = msg;
+  t.classList.add('show');
+  setTimeout(() => t.classList.remove('show'), 3000);
+}
+
+function switchComp(idx) {
+  compKeys.forEach((ck, i) => {
+    document.getElementById('panel-' + ck).classList.toggle('active', i === idx);
+    const tab = document.getElementById('tab-' + ck);
+    tab.classList.remove('active', 'done');
+    if (i === idx) tab.classList.add('active');
+    else if (isCompComplete(ck)) tab.classList.add('done');
+  });
+  window.scrollTo({ top: 0, behavior: 'smooth' });
+}
+
+function nextComp(current) {
+  const ck = compKeys[current];
+  if (!isCompComplete(ck)) {
+    showToast('Te rugăm să răspunzi la toate întrebările din această secțiune.');
+    return;
+  }
+  switchComp(current + 1);
+}
+
+function submitAll() {
+  for (let i = 0; i < compKeys.length; i++) {
+    if (!isCompComplete(compKeys[i])) {
+      switchComp(i);
+      showToast('Te rugăm să completezi toate întrebările înainte de finalizare.');
+      return;
+    }
+  }
+  showResults();
+}
+
+function showResults() {
+  document.getElementById('screen-quiz').classList.remove('active');
+  document.getElementById('screen-results').style.display = 'block';
+  document.getElementById('progressWrap').style.display = 'none';
+
+  const scores = { c11: getCompTotal('c11'), c12: getCompTotal('c12'), c13: getCompTotal('c13') };
+
+  compKeys.forEach((ck, i) => {
+    const s = scores[ck];
+    const lvl = getLevel(s);
+    const pct = (s / 32 * 100).toFixed(0);
+    document.getElementById('score-' + ck + '-val').textContent = s.toFixed(2);
+    document.getElementById('bar-' + ck).style.width = pct + '%';
+    const el = document.getElementById('level-' + ck);
+    el.textContent = lvl.label;
+    el.className = 'level-tag ' + lvl.cls;
+  });
+
+  const total = (scores.c11 + scores.c12 + scores.c13).toFixed(2);
+  document.getElementById('score-total').textContent = total;
+
+  const pctTotal = total / 96;
+  let desc = '';
+  if (pctTotal < 0.38) desc = 'Competențe digitale incipiente în Domeniul 1. Se recomandă formare de bază.';
+  else if (pctTotal < 0.63) desc = 'Competențe digitale de bază. Se recomandă aprofundarea abilităților de navigare și evaluare a informațiilor.';
+  else if (pctTotal < 0.88) desc = 'Competențe digitale bune. Participantul se descurcă independent cu activitățile digitale uzuale.';
+  else desc = 'Competențe digitale avansate. Participantul poate ghida alți utilizatori și gestiona situații complexe.';
+  document.getElementById('total-desc').textContent = desc;
+
+  window.scrollTo({ top: 0, behavior: 'smooth' });
+}
+
+function startQuiz() {
+  document.getElementById('screen-intro').style.display = 'none';
+  document.getElementById('screen-quiz').classList.add('active');
+  document.getElementById('progressWrap').style.display = 'block';
+  compKeys.forEach(ck => buildQuestions(ck));
+}
+
+function restart() {
+  compKeys.forEach(ck => { answers[ck] = {}; });
+  document.getElementById('screen-results').style.display = 'none';
+  document.getElementById('screen-intro').style.display = 'block';
+  document.getElementById('progressWrap').style.display = 'none';
+  compKeys.forEach(ck => {
+    document.getElementById('questions-' + ck).innerHTML = '';
+    document.getElementById('tab-' + ck).classList.remove('done', 'active');
+  });
+  document.getElementById('tab-c11').classList.add('active');
+  updateProgress();
+}
+</script>
+</body>
+</html>
